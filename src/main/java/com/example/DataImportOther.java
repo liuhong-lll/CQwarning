@@ -30,8 +30,8 @@ public class DataImportOther {
     public DataImportOther() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-//            conn = DriverManager.getConnection("jdbc:mysql://192.168.1.252:3306/suidaobig?zeroDateTimeBehavior=convertToNull&characterEncoding=utf8", "root", "123asd123asd");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/suidaobig?zeroDateTimeBehavior=convertToNull&characterEncoding=utf8", "root", "");
+            conn = DriverManager.getConnection("jdbc:mysql://192.168.1.252:3306/suidaobig?zeroDateTimeBehavior=convertToNull&characterEncoding=utf8", "root", "123asd123asd");
+//            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/suidaobig?zeroDateTimeBehavior=convertToNull&characterEncoding=utf8", "root", "");
             conn.setAutoCommit(false);
         } catch (Exception e) {
             logger.error("链接数据库时异常！异常信息：" + e.getMessage());
@@ -40,92 +40,92 @@ public class DataImportOther {
 
     public void run() throws SQLException, IOException {
 //                更新day_5_count（前5天数量）
-//        try {
-//            String sql2 = "SELECT id, author,day_4_count from `stang_bid_day_worning`";
-//            PreparedStatement pstmt2 = conn.prepareStatement(sql2);
-//            ResultSet rs2 = pstmt2.executeQuery();
-//            while (rs2.next()) {
-//                int id = rs2.getInt("id");
-//                String author = rs2.getString("author");
-//                int day_4_count = rs2.getInt("day_4_count");
-//                String sql = "update stang_bid_day_worning set day_5_count = ? where id = ?";
-//                PreparedStatement pstmt = conn.prepareStatement(sql);
-//                pstmt.setInt(1, day_4_count);
-//                pstmt.setInt(2, id);
-//                pstmt.executeUpdate();
-//                conn.commit();
-//                System.out.println("day_5_count更新成功+" + author);
-//            }
-//            System.out.println("==========================  day_5_count  更新成功完成================");
-//        } catch (Exception e) {
-//            System.out.println("day_5_count  更新 发生错误：" + e.toString());
-//        }
-//        //        更新day_4_count（前4天数量）
-//        try {
-//            String sql2 = "SELECT id, author,day_3_count from `stang_bid_day_worning`";
-//            PreparedStatement pstmt2 = conn.prepareStatement(sql2);
-//            ResultSet rs2 = pstmt2.executeQuery();
-//            while (rs2.next()) {
-//                int id = rs2.getInt("id");
-//                int day_3_count = rs2.getInt("day_3_count");
-//                String author = rs2.getString("author");
-//                String sql = "update stang_bid_day_worning set day_4_count = ? where id = ?";
-//                PreparedStatement pstmt = conn.prepareStatement(sql);
-//                pstmt.setInt(1, day_3_count);
-//                pstmt.setInt(2, id);
-//                pstmt.executeUpdate();
-//                conn.commit();
-//                System.out.println("day_4_count更新成功+" + author);
-//            }
-//            System.out.println("==========================  day_4_count  更新成功完成================");
-//        } catch (Exception e) {
-//            System.out.println("day_4_count  更新 发生错误：" + e.toString());
-//        }
-//
-////        更新day_3_count（前3天数量）
-//        try {
-//            String sql2 = "SELECT id, author,day_2_count from `stang_bid_day_worning`";
-//            PreparedStatement pstmt2 = conn.prepareStatement(sql2);
-//            ResultSet rs2 = pstmt2.executeQuery();
-//            while (rs2.next()) {
-//                int id = rs2.getInt("id");
-//                int day_2_count = rs2.getInt("day_2_count");
-//                String author = rs2.getString("author");
-//                String sql = "update stang_bid_day_worning set day_3_count = ? where id = ?";
-//                PreparedStatement pstmt = conn.prepareStatement(sql);
-//                pstmt.setInt(1, day_2_count);
-//                pstmt.setInt(2, id);
-//                pstmt.executeUpdate();
-//                conn.commit();
-//                System.out.println("day_3_count更新成功+" + author);
-//            }
-//            System.out.println("==========================  day_3_count  更新成功完成================");
-//        } catch (Exception e) {
-//            System.out.println("day_3_count  更新 发生错误：" + e.toString());
-//        }
-//        //更新day_2_count（前2天数量）
-//        try {
-//            String sql1 = "SELECT id, author,day_1_count from `stang_bid_day_worning`";
-//
-//            PreparedStatement pstmt1 = conn.prepareStatement(sql1);
-//            ResultSet rs1 = pstmt1.executeQuery();
-//
-//            while (rs1.next()) {
-//                int id = rs1.getInt("id");
-//                String author = rs1.getString("author");
-//                int day_1_count = rs1.getInt("day_1_count");
-//                String sql = "update stang_bid_day_worning set day_2_count = ? where id = ?";
-//                PreparedStatement pstmt = conn.prepareStatement(sql);
-//                pstmt.setInt(1, day_1_count);
-//                pstmt.setInt(2, id);
-//                pstmt.executeUpdate();
-//                System.out.println("day_2_count更新成功+" + author);
-//                conn.commit();
-//            }
-//            System.out.println("==========================  day_2_count  更新成功完成================");
-//        } catch (Exception e) {
-//            System.out.println("day_2_count  更新 发生错误：" + e.toString());
-//        }
+        try {
+            String sql2 = "SELECT id, author,day_4_count from `stang_bid_day_worning`";
+            PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+            ResultSet rs2 = pstmt2.executeQuery();
+            while (rs2.next()) {
+                int id = rs2.getInt("id");
+                String author = rs2.getString("author");
+                int day_4_count = rs2.getInt("day_4_count");
+                String sql = "update stang_bid_day_worning set day_5_count = ? where id = ?";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setInt(1, day_4_count);
+                pstmt.setInt(2, id);
+                pstmt.executeUpdate();
+                conn.commit();
+                System.out.println("day_5_count更新成功+" + author);
+            }
+            System.out.println("==========================  day_5_count  更新成功完成================");
+        } catch (Exception e) {
+            System.out.println("day_5_count  更新 发生错误：" + e.toString());
+        }
+        //        更新day_4_count（前4天数量）
+        try {
+            String sql2 = "SELECT id, author,day_3_count from `stang_bid_day_worning`";
+            PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+            ResultSet rs2 = pstmt2.executeQuery();
+            while (rs2.next()) {
+                int id = rs2.getInt("id");
+                int day_3_count = rs2.getInt("day_3_count");
+                String author = rs2.getString("author");
+                String sql = "update stang_bid_day_worning set day_4_count = ? where id = ?";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setInt(1, day_3_count);
+                pstmt.setInt(2, id);
+                pstmt.executeUpdate();
+                conn.commit();
+                System.out.println("day_4_count更新成功+" + author);
+            }
+            System.out.println("==========================  day_4_count  更新成功完成================");
+        } catch (Exception e) {
+            System.out.println("day_4_count  更新 发生错误：" + e.toString());
+        }
+
+//        更新day_3_count（前3天数量）
+        try {
+            String sql2 = "SELECT id, author,day_2_count from `stang_bid_day_worning`";
+            PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+            ResultSet rs2 = pstmt2.executeQuery();
+            while (rs2.next()) {
+                int id = rs2.getInt("id");
+                int day_2_count = rs2.getInt("day_2_count");
+                String author = rs2.getString("author");
+                String sql = "update stang_bid_day_worning set day_3_count = ? where id = ?";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setInt(1, day_2_count);
+                pstmt.setInt(2, id);
+                pstmt.executeUpdate();
+                conn.commit();
+                System.out.println("day_3_count更新成功+" + author);
+            }
+            System.out.println("==========================  day_3_count  更新成功完成================");
+        } catch (Exception e) {
+            System.out.println("day_3_count  更新 发生错误：" + e.toString());
+        }
+        //更新day_2_count（前2天数量）
+        try {
+            String sql1 = "SELECT id, author,day_1_count from `stang_bid_day_worning`";
+
+            PreparedStatement pstmt1 = conn.prepareStatement(sql1);
+            ResultSet rs1 = pstmt1.executeQuery();
+
+            while (rs1.next()) {
+                int id = rs1.getInt("id");
+                String author = rs1.getString("author");
+                int day_1_count = rs1.getInt("day_1_count");
+                String sql = "update stang_bid_day_worning set day_2_count = ? where id = ?";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setInt(1, day_1_count);
+                pstmt.setInt(2, id);
+                pstmt.executeUpdate();
+                System.out.println("day_2_count更新成功+" + author);
+                conn.commit();
+            }
+            System.out.println("==========================  day_2_count  更新成功完成================");
+        } catch (Exception e) {
+            System.out.println("day_2_count  更新 发生错误：" + e.toString());
+        }
         //更新day_1_count（前1天数量）
         try {
             String sql1 = "SELECT id, name,day_1_count,update_time,url  from `stang_bid_worning`";
