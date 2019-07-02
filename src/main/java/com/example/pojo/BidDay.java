@@ -10,7 +10,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import static jxl.biff.BaseCellFeatures.logger;
-import org.slf4j.LoggerFactory;
 
 /**
  *
