@@ -124,6 +124,9 @@ public class GetExcel {
             cell.setCellValue(map.get("url"));
             cell.setCellStyle(cellStyle);
             cell = row.createCell(2);
+            cell.setCellValue(map.get("auditor"));
+            cell.setCellStyle(cellStyle);
+            cell = row.createCell(3);
         }
     }
 
@@ -144,15 +147,17 @@ public class GetExcel {
             PreparedStatement pstmt = null;
             String sql = null;
 
-            sql = "SELECT author,url FROM `stang_bid_day_worning` WHERE day_1_count=0 AND day_2_count=0 AND day_3_count=0";
+            sql = "SELECT author,url,auditor FROM `stang_bid_day_worning` WHERE day_1_count=0 AND day_2_count=0 AND day_3_count=0 AND day_4_count=0 AND day_5_count=0 and project in('gitspider','newspider3','cityspider')";
             pstmt = conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 HashMap<String, String> tmap = new HashMap<String, String>();
                 String author = rs.getString("author");
                 String url = rs.getString("url");
+                String auditor = rs.getString("auditor");
                 tmap.put("author", author);
                 tmap.put("url", url);
+                tmap.put("auditor", auditor);
                 list.add(tmap);
             }
         } catch (SQLException ex) {
@@ -174,6 +179,8 @@ public class GetExcel {
         cell.setCellStyle(cellStyle);
         cell = firstrow.createCell(1);
         cell.setCellValue("网站链接");
+        cell = firstrow.createCell(2);
+        cell.setCellValue("负责人");
     }
 
     public static void main(String args[]) throws ClassNotFoundException, SQLException {
