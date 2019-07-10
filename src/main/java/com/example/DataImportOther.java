@@ -207,7 +207,7 @@ public class DataImportOther {
         PreparedStatement pstmt = null;
         List<String> list = new ArrayList<String>();
         try {
-            String sql = "SELECT author FROM `stang_bid_day_worning` WHERE day_1_count=0 AND day_2_count=0 and day_3_count=0 and author   like'%公共资源%' and label = 1";
+            String sql = "SELECT author FROM `stang_bid_day_worning` WHERE day_1_count=0 AND day_2_count=0 and day_3_count=0 and author   like'%公共资源%' and label = 1 and project !='ZZBS_Projects'";
             pstmt = conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
