@@ -21,12 +21,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.CellStyle;
 
 /**
- *
+ *近五天爬虫数量为0
  * @author Administrator
  */
 public class GetExcel {
@@ -70,11 +72,20 @@ public class GetExcel {
 
         //创建一个工作簿
         HSSFSheet sheet = workbook.createSheet("问题爬虫");
-        sheet.setDefaultRowHeightInPoints(25);   //全表默认行高25
+        sheet.setDefaultRowHeightInPoints(30);   //全表默认行高25
         sheet.setDefaultColumnWidth(15);  //全表默认列宽15
         sheet.setColumnWidth(0, 20000);  //第一列列宽77
-        sheet.setColumnWidth(2, 5000);
-        sheet.setColumnWidth(4, 25000);
+//        sheet.setColumnWidth(2, 5000);
+//        sheet.setColumnWidth(4, 25000);
+        //设置字体
+        CellStyle redStyle = workbook.createCellStyle();
+        HSSFFont redFont = workbook.createFont();
+
+        //设置字体大小
+        redFont.setFontHeightInPoints((short) 12);
+
+        //redFont.setFontName("宋体");
+        redStyle.setFont(redFont);
 
         //创建第一行
         setFirstRow(sheet, cellStyle);
@@ -85,7 +96,7 @@ public class GetExcel {
         //输出为文件
         FileOutputStream fileOut = null;
         try {
-            fileOut = new FileOutputStream("C:\\Users\\Administrator\\Desktop\\test.xls");
+            fileOut = new FileOutputStream("C:\\Users\\Administrator\\Desktop\\test1.xls");
 //            fileOut = new FileOutputStream("/home/suitang01/zhongjiaoexcel/" + sdf.format(new Date()) + ".xls");
             workbook.write(fileOut);
             //fileOut.close();  
@@ -127,6 +138,12 @@ public class GetExcel {
             cell.setCellValue(map.get("auditor"));
             cell.setCellStyle(cellStyle);
             cell = row.createCell(3);
+            cell.setCellValue(map.get("label"));
+            cell.setCellStyle(cellStyle);
+            cell = row.createCell(4);
+            cell.setCellValue(map.get("notes"));
+            cell.setCellStyle(cellStyle);
+            cell = row.createCell(5);
         }
     }
 
@@ -147,7 +164,7 @@ public class GetExcel {
             PreparedStatement pstmt = null;
             String sql = null;
 
-            sql = "SELECT author,url,auditor FROM `stang_bid_day_worning` WHERE day_1_count=0 AND day_2_count=0 AND day_3_count=0 AND day_4_count=0 AND day_5_count=0 and project in('gitspider','newspider3','cityspider')";
+            sql = "SELECT author,url,auditor,label,notes FROM `stang_bid_day_worning` WHERE day_1_count=0 AND day_2_count=0 AND day_3_count=0 AND day_4_count=0 AND day_5_count=0 and project in('gitspider','newspider3','cityspider') and label =1";
             pstmt = conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -155,9 +172,13 @@ public class GetExcel {
                 String author = rs.getString("author");
                 String url = rs.getString("url");
                 String auditor = rs.getString("auditor");
+                String label = rs.getString("label");
+                String notes = rs.getString("notes");
                 tmap.put("author", author);
                 tmap.put("url", url);
                 tmap.put("auditor", auditor);
+                tmap.put("label", label);
+                tmap.put("notes", notes);
                 list.add(tmap);
             }
         } catch (SQLException ex) {
@@ -181,6 +202,10 @@ public class GetExcel {
         cell.setCellValue("网站链接");
         cell = firstrow.createCell(2);
         cell.setCellValue("负责人");
+        cell = firstrow.createCell(3);
+        cell.setCellValue("是否注释");
+        cell = firstrow.createCell(4);
+        cell.setCellValue("备注");
     }
 
     public static void main(String args[]) throws ClassNotFoundException, SQLException {
